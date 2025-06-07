@@ -2896,17 +2896,11 @@
     name = "Brandon Elam Barker";
   };
   bbenne10 = {
-    email = "Bryan.Bennett@protonmail.com";
+    email = "Bryan.Bennett+nixpkgs@proton.me";
     matrix = "@bryan.bennett:matrix.org";
     github = "bbenne10";
     githubId = 687376;
     name = "Bryan Bennett";
-    keys = [
-      {
-        # compare with https://keybase.io/bbenne10
-        fingerprint = "41EA 00B4 00F9 6970 1CB2  D3AF EF90 E3E9 8B8F 5C0B";
-      }
-    ];
   };
   bbenno = {
     email = "nix@bbenno.com";
@@ -4758,12 +4752,6 @@
     github = "cleverca22";
     githubId = 848609;
     name = "Michael Bishop";
-  };
-  clevor = {
-    email = "myclevorname@gmail.com";
-    github = "myclevorname";
-    githubId = 140354451;
-    name = "Samuel Connelly";
   };
   clkamp = {
     email = "c@lkamp.de";
@@ -16173,7 +16161,7 @@
     email = "mightyiampresence@gmail.com";
     github = "mightyiam";
     githubId = 635591;
-    name = "Shahar Dawn Or";
+    name = "Shahar \"Dawn\" Or";
   };
   mihaimaruseac = {
     email = "mihaimaruseac@gmail.com";
@@ -17726,6 +17714,12 @@
     name = "nikstur";
     github = "nikstur";
     githubId = 61635709;
+  };
+  nilathedragon = {
+    email = "nilathedragon@pm.me";
+    name = "Nila The Dragon";
+    github = "nilathedragon";
+    githubId = 43315617;
   };
   nilp0inter = {
     email = "robertomartinezp@gmail.com";
@@ -27257,6 +27251,11 @@
     github = "yesbox";
     githubId = 4113027;
     name = "Jesper Geertsen Jonsson";
+  };
+  yethal = {
+    github = "yethal";
+    githubId = 26117918;
+    name = "Yethal";
   };
   yinfeng = {
     email = "lin.yinfeng@outlook.com";
