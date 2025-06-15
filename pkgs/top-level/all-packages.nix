@@ -2044,10 +2044,6 @@ with pkgs;
 
   cloud-init = callPackage ../tools/virtualization/cloud-init { inherit systemd; };
 
-  clingo = callPackage ../applications/science/logic/potassco/clingo.nix { };
-
-  clingcon = callPackage ../applications/science/logic/potassco/clingcon.nix { };
-
   coloredlogs = with python3Packages; toPythonApplication coloredlogs;
 
   czkawka-full = czkawka.wrapper.override {
@@ -3050,9 +3046,7 @@ with pkgs;
     garage_1_x
     ;
 
-  gauge-unwrapped = callPackage ../development/tools/gauge { };
-  gauge = callPackage ../development/tools/gauge/wrapper.nix { };
-  gaugePlugins = recurseIntoAttrs (callPackage ../development/tools/gauge/plugins { });
+  gaugePlugins = recurseIntoAttrs (callPackage ../by-name/ga/gauge/plugins { });
 
   gawd = python3Packages.toPythonApplication python3Packages.gawd;
 
@@ -3841,6 +3835,10 @@ with pkgs;
 
   # Not in aliases because it wouldn't get picked up by callPackage
   netbox = netbox_4_2;
+
+  netcap-nodpi = callPackage ../by-name/ne/netcap/package.nix {
+    withDpi = false;
+  };
 
   netcat = libressl.nc.overrideAttrs (old: {
     meta = old.meta // {
@@ -4780,13 +4778,6 @@ with pkgs;
 
   wyrd = callPackage ../tools/misc/wyrd {
     ocamlPackages = ocaml-ng.ocamlPackages_4_14;
-  };
-
-  xbursttools = callPackage ../tools/misc/xburst-tools {
-    # It needs a cross compiler for mipsel to build the firmware it will
-    # load into the Ben Nanonote
-    gccCross = pkgsCross.ben-nanonote.buildPackages.gccWithoutTargetLibc;
-    autoconf = buildPackages.autoconf269;
   };
 
   clipbuzz = callPackage ../tools/misc/clipbuzz {
@@ -14401,6 +14392,12 @@ with pkgs;
   vscodium-fhs = vscodium.fhs;
   vscodium-fhsWithPackages = vscodium.fhsWithPackages;
 
+  code-cursor = callPackage ../by-name/co/code-cursor/package.nix {
+    vscode-generic = ../applications/editors/vscode/generic.nix;
+  };
+  code-cursor-fhs = code-cursor.fhs;
+  code-cursor-fhsWithPackages = code-cursor.fhsWithPackages;
+
   windsurf = callPackage ../by-name/wi/windsurf/package.nix {
     vscode-generic = ../applications/editors/vscode/generic.nix;
   };
@@ -14954,12 +14951,6 @@ with pkgs;
 
   flightgear = libsForQt5.callPackage ../games/flightgear { };
 
-  freecad-wayland = freecad.override { withWayland = true; };
-  freecad-qt6 = freecad.override {
-    withWayland = true;
-    qtVersion = 6;
-  };
-
   freeciv = callPackage ../games/freeciv {
     sdl2Client = false;
     gtkClient = true;
@@ -15151,22 +15142,17 @@ with pkgs;
     protobuf = protobuf_21;
   };
 
-  quake3wrapper = callPackage ../games/quake3/wrapper { };
-
-  quake3demo = quake3wrapper {
-    name = "quake3-demo-${lib.getVersion quake3demodata}";
-    description = "Demo of Quake 3 Arena, a classic first-person shooter";
-    paks = [
-      quake3pointrelease
-      quake3demodata
-    ];
-  };
-
-  quake3demodata = callPackage ../games/quake3/content/demo.nix { };
-
-  quake3pointrelease = callPackage ../games/quake3/content/pointrelease.nix { };
-
-  quake3hires = callPackage ../games/quake3/content/hires.nix { };
+  inherit (import ../games/quake3 pkgs.callPackage)
+    quake3wrapper
+    quake3arenadata
+    quake3demodata
+    quake3pointrelease
+    quake3arena
+    quake3arena-hires
+    quake3demo
+    quake3demo-hires
+    quake3hires
+    ;
 
   quakespasm = callPackage ../games/quakespasm { };
   vkquake = callPackage ../games/quakespasm/vulkan.nix { };
