@@ -306,7 +306,7 @@ in
   cinnamon-wayland = runTest ./cinnamon-wayland.nix;
   cjdns = runTest ./cjdns.nix;
   clatd = runTest ./clatd.nix;
-  clickhouse = runTest ./clickhouse.nix;
+  clickhouse = import ./clickhouse { inherit runTest; };
   cloud-init = handleTest ./cloud-init.nix { };
   cloud-init-hostname = handleTest ./cloud-init-hostname.nix { };
   cloudlog = runTest ./cloudlog.nix;
@@ -938,6 +938,7 @@ in
   nix-required-mounts = runTest ./nix-required-mounts;
   nix-serve = runTest ./nix-serve.nix;
   nix-serve-ssh = runTest ./nix-serve-ssh.nix;
+  nix-store-veritysetup = runTest ./nix-store-veritysetup.nix;
   nixops = handleTest ./nixops/default.nix { };
   nixos-generate-config = runTest ./nixos-generate-config.nix;
   nixos-rebuild-install-bootloader = handleTestOn [
@@ -1372,6 +1373,7 @@ in
   systemd-homed = runTest ./systemd-homed.nix;
   systemtap = handleTest ./systemtap.nix { };
   startx = import ./startx.nix { inherit pkgs runTest; };
+  szurubooru = handleTest ./szurubooru.nix { };
   taler = handleTest ./taler { };
   tandoor-recipes = runTest ./tandoor-recipes.nix;
   tandoor-recipes-script-name = runTest ./tandoor-recipes-script-name.nix;
@@ -1396,6 +1398,7 @@ in
   tinydns = runTest ./tinydns.nix;
   tinyproxy = runTest ./tinyproxy.nix;
   tinywl = runTest ./tinywl.nix;
+  tlsrpt = runTest ./tlsrpt.nix;
   tmate-ssh-server = runTest ./tmate-ssh-server.nix;
   tomcat = runTest ./tomcat.nix;
   tor = runTest ./tor.nix;
@@ -1462,7 +1465,7 @@ in
   vault-postgresql = runTest ./vault-postgresql.nix;
   vaultwarden = discoverTests (import ./vaultwarden.nix);
   vdirsyncer = runTest ./vdirsyncer.nix;
-  vector = handleTest ./vector { };
+  vector = import ./vector { inherit runTest; };
   velocity = runTest ./velocity.nix;
   vengi-tools = runTest ./vengi-tools.nix;
   victoriametrics = handleTest ./victoriametrics { };

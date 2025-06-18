@@ -2174,10 +2174,6 @@ with pkgs;
     espanso = espanso-wayland;
   };
 
-  fastly = callPackage ../misc/fastly {
-    # If buildGoModule is overridden, provide a matching version of the go attribute
-  };
-
   f3d_egl = f3d.override { vtk_9 = vtk_9_egl; };
 
   fast-cli = nodePackages.fast-cli;
@@ -3042,7 +3038,7 @@ with pkgs;
     garage_0_9
     garage_0_8_7
     garage_0_9_4
-    garage_1_1_0
+    garage_1_2_0
     garage_1_x
     ;
 
@@ -3870,6 +3866,7 @@ with pkgs;
   inherit (callPackages ../applications/networking/cluster/nomad { })
     nomad
     nomad_1_9
+    nomad_1_10
     ;
 
   nomacs-qt6 = nomacs.override { qtVersion = 6; };
@@ -5058,7 +5055,6 @@ with pkgs;
   flutter332 = flutterPackages.v3_32;
   flutter329 = flutterPackages.v3_29;
   flutter327 = flutterPackages.v3_27;
-  flutter326 = flutterPackages.v3_26;
   flutter324 = flutterPackages.v3_24;
 
   fpc = callPackage ../development/compilers/fpc { };
@@ -8327,8 +8323,6 @@ with pkgs;
     }
   );
 
-  qxmpp = qt6Packages.callPackage ../development/libraries/qxmpp { };
-
   gnutls = callPackage ../development/libraries/gnutls {
     util-linux = util-linuxMinimal; # break the cyclic dependency
     autoconf = buildPackages.autoconf269;
@@ -8862,7 +8856,6 @@ with pkgs;
       stdenv = gccStdenv; # Required for darwin
     })
     libprom
-    libpromhttp
     ;
 
   libpulsar = callPackage ../development/libraries/libpulsar {
@@ -9330,7 +9323,6 @@ with pkgs;
       protobuf_31 = callPackage ../development/libraries/protobuf/31.nix { };
       protobuf_30 = callPackage ../development/libraries/protobuf/30.nix { };
       protobuf_29 = callPackage ../development/libraries/protobuf/29.nix { };
-      protobuf_28 = callPackage ../development/libraries/protobuf/28.nix { };
       protobuf_27 = callPackage ../development/libraries/protobuf/27.nix { };
       protobuf_26 = callPackage ../development/libraries/protobuf/26.nix { };
       protobuf_25 = callPackage ../development/libraries/protobuf/25.nix { };
@@ -9342,7 +9334,6 @@ with pkgs;
     protobuf_31
     protobuf_30
     protobuf_29
-    protobuf_28
     protobuf_27
     protobuf_26
     protobuf_25
@@ -9683,6 +9674,8 @@ with pkgs;
   sundials = callPackage ../development/libraries/sundials { };
 
   svxlink = libsForQt5.callPackage ../applications/radio/svxlink { };
+
+  szurubooru = callPackage ../servers/web-apps/szurubooru { };
 
   tclap = tclap_1_2;
 
@@ -12137,12 +12130,10 @@ with pkgs;
 
   inherit (callPackage ../applications/virtualization/docker { })
     docker_25
-    docker_26
-    docker_27
     docker_28
     ;
 
-  docker = docker_27;
+  docker = docker_28;
   docker-client = docker.override { clientOnly = true; };
 
   docker-gc = callPackage ../applications/virtualization/docker/gc.nix { };
@@ -12434,33 +12425,11 @@ with pkgs;
 
   firefox-bin-unwrapped = callPackage ../applications/networking/browsers/firefox-bin {
     inherit (firefox-unwrapped.passthru) applicationName;
-    channel = "release";
     generated = import ../applications/networking/browsers/firefox-bin/release_sources.nix;
   };
 
   firefox-bin = wrapFirefox firefox-bin-unwrapped {
     pname = "firefox-bin";
-  };
-
-  firefox-beta-bin-unwrapped = firefox-bin-unwrapped.override {
-    inherit (firefox-beta-unwrapped.passthru) applicationName;
-    channel = "beta";
-    generated = import ../applications/networking/browsers/firefox-bin/beta_sources.nix;
-  };
-
-  firefox-beta-bin = res.wrapFirefox firefox-beta-bin-unwrapped {
-    pname = "firefox-beta-bin";
-  };
-
-  firefox-devedition-bin-unwrapped = callPackage ../applications/networking/browsers/firefox-bin {
-    inherit (firefox-devedition-unwrapped.passthru) applicationName;
-    channel = "developer-edition";
-    generated = import ../applications/networking/browsers/firefox-bin/developer-edition_sources.nix;
-  };
-
-  firefox-devedition-bin = res.wrapFirefox firefox-devedition-bin-unwrapped {
-    pname = "firefox-devedition-bin";
-    wmClass = "firefox-aurora";
   };
 
   librewolf-unwrapped = import ../applications/networking/browsers/librewolf {
@@ -14285,8 +14254,6 @@ with pkgs;
 
   qpdfview = libsForQt5.callPackage ../applications/office/qpdfview { };
 
-  vimgolf = callPackage ../games/vimgolf { };
-
   # this is a lower-level alternative to wrapNeovim conceived to handle
   # more usecases when wrapping neovim. The interface is being actively worked on
   # so expect breakage. use wrapNeovim instead if you want a stable alternative
@@ -14612,8 +14579,6 @@ with pkgs;
 
   youtube-viewer = perlPackages.WWWYoutubeViewer;
 
-  yuview = libsForQt5.yuview;
-
   zathuraPkgs = callPackage ../applications/misc/zathura { };
   zathura = zathuraPkgs.zathuraWrapper;
 
@@ -14672,16 +14637,6 @@ with pkgs;
   bitcoind-knots = callPackage ../applications/blockchains/bitcoin-knots {
     withGui = false;
     inherit (darwin) autoSignDarwinBinariesHook;
-  };
-
-  bitcoin-abc = libsForQt5.callPackage ../applications/blockchains/bitcoin-abc {
-    withGui = true;
-    protobuf = protobuf_21;
-  };
-  bitcoind-abc = callPackage ../applications/blockchains/bitcoin-abc {
-    mkDerivation = stdenv.mkDerivation;
-    protobuf = protobuf_21;
-    withGui = false;
   };
 
   cryptop = python3.pkgs.callPackage ../applications/blockchains/cryptop { };
@@ -15528,12 +15483,6 @@ with pkgs;
 
   samtools = callPackage ../applications/science/biology/samtools { };
 
-  inherit (callPackages ../applications/science/biology/sumatools { })
-    sumalibs
-    sumaclust
-    sumatra
-    ;
-
   trimmomatic = callPackage ../applications/science/biology/trimmomatic {
     jdk = pkgs.jdk21_headless;
     # Reduce closure size
@@ -16156,10 +16105,6 @@ with pkgs;
   utsushi = callPackage ../misc/drivers/utsushi { };
 
   utsushi-networkscan = callPackage ../misc/drivers/utsushi/networkscan.nix { };
-
-  lima = callPackage ../applications/virtualization/lima {
-    inherit (darwin) sigtool;
-  };
 
   image_optim = callPackage ../applications/graphics/image_optim { inherit (nodePackages) svgo; };
 

@@ -93,7 +93,6 @@ self: super: with self; {
 
   adios2 = toPythonModule (
     pkgs.adios2.override {
-      python3 = python;
       python3Packages = self;
       pythonSupport = true;
     }
@@ -6376,6 +6375,8 @@ self: super: with self; {
 
   hebg = callPackage ../development/python-modules/hebg { };
 
+  heif-image-plugin = callPackage ../development/python-modules/heif-image-plugin { };
+
   help2man = callPackage ../development/python-modules/help2man { };
 
   helpdev = callPackage ../development/python-modules/helpdev { };
@@ -6423,6 +6424,8 @@ self: super: with self; {
   hier-config = callPackage ../development/python-modules/hier-config { };
 
   hieroglyph = callPackage ../development/python-modules/hieroglyph { };
+
+  highctidh = callPackage ../development/python-modules/highctidh { };
 
   highdicom = callPackage ../development/python-modules/highdicom { };
 
@@ -9366,6 +9369,8 @@ self: super: with self; {
 
   mplleaflet = callPackage ../development/python-modules/mplleaflet { };
 
+  mpltoolbox = callPackage ../development/python-modules/mpltoolbox { };
+
   mpmath = callPackage ../development/python-modules/mpmath { };
 
   mpris-server = callPackage ../development/python-modules/mpris-server { };
@@ -11366,6 +11371,8 @@ self: super: with self; {
     inherit (pkgs.xorg) libxcb;
   };
 
+  pillow-avif-plugin = callPackage ../development/python-modules/pillow-avif-plugin { };
+
   pillow-heif = callPackage ../development/python-modules/pillow-heif { };
 
   pillow-jpls = callPackage ../development/python-modules/pillow-jpls { };
@@ -11512,6 +11519,8 @@ self: super: with self; {
   ploomber-core = callPackage ../development/python-modules/ploomber-core { };
 
   ploomber-extension = callPackage ../development/python-modules/ploomber-extension { };
+
+  plopp = callPackage ../development/python-modules/plopp { };
 
   plotext = callPackage ../development/python-modules/plotext { };
 
@@ -11997,6 +12006,8 @@ self: super: with self; {
   py-expression-eval = callPackage ../development/python-modules/py-expression-eval { };
 
   py-improv-ble-client = callPackage ../development/python-modules/py-improv-ble-client { };
+
+  py-libnuma = callPackage ../development/python-modules/py-libnuma { };
 
   py-libzfs = callPackage ../development/python-modules/py-libzfs { };
 
@@ -13626,7 +13637,13 @@ self: super: with self; {
     callPackage ../development/python-modules/pyside6 { inherit (pkgs) cmake ninja; }
   );
 
+  pyside6-fluent-widgets = callPackage ../development/python-modules/pyside6-fluent-widgets { };
+
   pyside6-qtads = callPackage ../development/python-modules/pyside6-qtads { };
+
+  pysidesix-frameless-window =
+    callPackage ../development/python-modules/pysidesix-frameless-window
+      { };
 
   pysigma = callPackage ../development/python-modules/pysigma { };
 
@@ -15478,6 +15495,10 @@ self: super: with self; {
 
   robotframework = callPackage ../development/python-modules/robotframework { };
 
+  robotframework-assertion-engine =
+    callPackage ../development/python-modules/robotframework-assertion-engine
+      { };
+
   robotframework-databaselibrary =
     callPackage ../development/python-modules/robotframework-databaselibrary
       { };
@@ -15813,6 +15834,8 @@ self: super: with self; {
   scim2-server = callPackage ../development/python-modules/scim2-server { };
 
   scim2-tester = callPackage ../development/python-modules/scim2-tester { };
+
+  scipp = callPackage ../development/python-modules/scipp { };
 
   scipy = callPackage ../development/python-modules/scipy { };
 
@@ -17791,6 +17814,8 @@ self: super: with self; {
 
   torchWithoutRocm = self.torch.override { rocmSupport = false; };
 
+  torchao = callPackage ../development/python-modules/torchao { };
+
   torchaudio = callPackage ../development/python-modules/torchaudio { };
 
   torchaudio-bin = callPackage ../development/python-modules/torchaudio/bin.nix { };
@@ -18731,6 +18756,10 @@ self: super: with self; {
 
   unique-log-filter = callPackage ../development/python-modules/unique-log-filter { };
 
+  units-llnl = callPackage ../development/python-modules/units-llnl {
+    inherit (pkgs) units-llnl;
+  };
+
   unittest-data-provider = callPackage ../development/python-modules/unittest-data-provider { };
 
   unittest-xml-reporting = callPackage ../development/python-modules/unittest-xml-reporting { };
@@ -18985,6 +19014,10 @@ self: super: with self; {
 
   vivisect = callPackage ../development/python-modules/vivisect {
     inherit (pkgs.libsForQt5) wrapQtAppsHook;
+  };
+
+  vl-convert-python = callPackage ../development/python-modules/vl-convert-python {
+    inherit (pkgs) protobuf;
   };
 
   vllm = callPackage ../development/python-modules/vllm { };

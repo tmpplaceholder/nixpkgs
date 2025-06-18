@@ -12,16 +12,20 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "heimdall";
-  version = "2.2.1";
+  version = "2.2.2";
 
   src = fetchFromSourcehut {
     owner = "~grimler";
     repo = "Heimdall";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-x+mDTT+oUJ4ffZOmn+UDk3+YE5IevXM8jSxLKhGxXSM=";
+    hash = "sha256-ga2hAZhsKosEG//qXEf+1vhJYtsHwyq6QvMlZaSFIgQ=";
   };
 
   passthru.updateScript = gitUpdater { rev-prefix = "v"; };
+
+  patches = [
+    ./0001-Install-the-macOS-bundle-to-the-install-prefix.patch
+  ];
 
   outputs = [
     "out"
@@ -54,13 +58,15 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   meta = {
-    broken = enableGUI && !stdenv.hostPlatform.isLinux;
     description = "Cross-platform open-source tool suite used to flash firmware onto Samsung Galaxy devices";
     homepage = "https://git.sr.ht/~grimler/Heimdall";
     license = lib.licenses.mit;
-    mainProgram = if enableGUI then "heimdall-frontend" else "heimdall";
+    mainProgram =
+      (if enableGUI then "heimdall-frontend" else "heimdall")
+      + lib.optionalString stdenv.hostPlatform.isWindows ".exe";
     maintainers = with lib.maintainers; [
       surfaceflinger
+      timschumi
     ];
     platforms = with lib.platforms; unix ++ windows;
   };
