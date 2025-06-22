@@ -3176,6 +3176,16 @@ self: super: with self; {
 
   cython_0 = callPackage ../development/python-modules/cython/0.nix { };
 
+  cython_3_1 = cython.overridePythonAttrs rec {
+    version = "3.1.1";
+    src = pkgs.fetchFromGitHub {
+      owner = "cython";
+      repo = "cython";
+      tag = version;
+      hash = "sha256-KdRYPH3Do3KntgqLGIUSeD6DjmXNdFjI2ZSszzMjF6k=";
+    };
+  };
+
   cytoolz = callPackage ../development/python-modules/cytoolz { };
 
   dacite = callPackage ../development/python-modules/dacite { };
@@ -3861,6 +3871,8 @@ self: super: with self; {
 
   django-markup = callPackage ../development/python-modules/django-markup { };
 
+  django-mcp-server = callPackage ../development/python-modules/django-mcp-server { };
+
   django-mdeditor = callPackage ../development/python-modules/django-mdeditor { };
 
   django-mfa3 = callPackage ../development/python-modules/django-mfa3 { };
@@ -4067,6 +4079,8 @@ self: super: with self; {
   djangosaml2 = callPackage ../development/python-modules/djangosaml2 { };
 
   djmail = callPackage ../development/python-modules/djmail { };
+
+  djoser = callPackage ../development/python-modules/djoser { };
 
   dkimpy = callPackage ../development/python-modules/dkimpy { };
 
@@ -6216,7 +6230,11 @@ self: super: with self; {
 
   guessit = callPackage ../development/python-modules/guessit { };
 
-  guestfs = callPackage ../development/python-modules/guestfs { qemu = pkgs.qemu; };
+  guestfs = toPythonModule (
+    pkgs.libguestfs.override {
+      python3 = python;
+    }
+  );
 
   guidance = callPackage ../development/python-modules/guidance { };
 
@@ -8429,7 +8447,7 @@ self: super: with self; {
 
   llvmlite = callPackage ../development/python-modules/llvmlite {
     # llvmlite always requires a specific version of llvm.
-    llvm = pkgs.llvm_15;
+    llvm = pkgs.llvm_16;
   };
 
   lm-eval = callPackage ../development/python-modules/lm-eval { };
@@ -9912,6 +9930,8 @@ self: super: with self; {
 
   nanobind = callPackage ../development/python-modules/nanobind { };
 
+  nanoeigenpy = callPackage ../development/python-modules/nanoeigenpy { };
+
   nanoemoji = callPackage ../development/python-modules/nanoemoji { };
 
   nanoid = callPackage ../development/python-modules/nanoid { };
@@ -10879,7 +10899,11 @@ self: super: with self; {
 
   osqp = callPackage ../development/python-modules/osqp { };
 
+  osrparse = callPackage ../development/python-modules/osrparse { };
+
   oss2 = callPackage ../development/python-modules/oss2 { };
+
+  ossapi = callPackage ../development/python-modules/ossapi { };
 
   ossfs = callPackage ../development/python-modules/ossfs { };
 
@@ -13235,6 +13259,8 @@ self: super: with self; {
   );
 
   pypandoc = callPackage ../development/python-modules/pypandoc { };
+
+  pypaperless = callPackage ../development/python-modules/pypaperless { };
 
   pyparsebluray = callPackage ../development/python-modules/pyparsebluray { };
 
@@ -16917,6 +16943,9 @@ self: super: with self; {
   standard-aifc =
     if pythonAtLeast "3.13" then callPackage ../development/python-modules/standard-aifc { } else null;
 
+  standard-cgi =
+    if pythonAtLeast "3.13" then callPackage ../development/python-modules/standard-cgi { } else null;
+
   standard-chunk =
     if pythonAtLeast "3.13" then callPackage ../development/python-modules/standard-chunk { } else null;
 
@@ -16928,6 +16957,9 @@ self: super: with self; {
 
   standard-mailcap =
     if pythonOlder "3.13" then null else callPackage ../development/python-modules/standard-mailcap { };
+
+  standard-nntplib =
+    if pythonOlder "3.13" then null else callPackage ../development/python-modules/standard-nntplib { };
 
   standard-pipes =
     if pythonAtLeast "3.13" then callPackage ../development/python-modules/standard-pipes { } else null;
@@ -18618,6 +18650,8 @@ self: super: with self; {
 
   typing-inspection = callPackage ../development/python-modules/typing-inspection { };
 
+  typing-utils = callPackage ../development/python-modules/typing-utils { };
+
   typing-validation = callPackage ../development/python-modules/typing-validation { };
 
   typish = callPackage ../development/python-modules/typish { };
@@ -18909,6 +18943,8 @@ self: super: with self; {
   validators = callPackage ../development/python-modules/validators { };
 
   validobj = callPackage ../development/python-modules/validobj { };
+
+  valkey = callPackage ../development/python-modules/valkey { };
 
   vallox-websocket-api = callPackage ../development/python-modules/vallox-websocket-api { };
 
