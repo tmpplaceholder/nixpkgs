@@ -16,16 +16,18 @@ let
   variants = {
     # ./update-zen.py zen
     zen = {
-      version = "6.17.2"; # zen
-      suffix = "zen1"; # zen
-      sha256 = "0xb0x8726znk7v39incvdsmqh0plfzyjj4sg0dmbjqlgi2kh560r"; # zen
+      version = "6.16.12"; # zen
+      suffix = "zen"; # zen
+      rev = "4bf499d330ee470e98e7dae639575d1b350eb816"; # zen
+      sha256 = "0by8sz6rnymcv1ny44dp68pcys62dsj0kj31xz4gp05rff7y2xz9"; # zen
       isLqx = false;
     };
     # ./update-zen.py lqx
     lqx = {
-      version = "6.17.5"; # lqx
+      version = "6.16.12"; # lqx
       suffix = "lqx1"; # lqx
-      sha256 = "1jgwpxw1h27kphj0rrf1b9dbhj4jlycr6lnykv8dhf3m0p5vjn46"; # lqx
+      rev = "v6.16.12-lqx1"; # lqx
+      sha256 = "0vqmsz9qy5ynwlxanqhyk21pix2hcvr14c4ipldnrwlskdrs05iy"; # lqx
       isLqx = true;
     };
   };
@@ -33,6 +35,7 @@ let
     {
       version,
       suffix,
+      rev,
       sha256,
       isLqx,
     }:
@@ -47,8 +50,8 @@ let
         src = fetchFromGitHub {
           owner = "zen-kernel";
           repo = "zen-kernel";
-          rev = "v${version}-${suffix}";
-          inherit sha256;
+          # rev = "v${version}-${suffix}";
+          inherit rev sha256;
         };
 
         # This is based on the following sources:
